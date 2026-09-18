@@ -28,88 +28,66 @@
       padding: 0;
     }
 
+    html,
+    body {
+      height: 100%;
+      overflow: hidden;
+    }
+
     body {
       background-color: var(--bg-color);
       color: var(--text-main);
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      min-height: 100vh;
-      min-height: 100dvh; /* dynamic viewport height for mobile browsers */
       display: flex;
       flex-direction: column;
-      overflow-x: hidden;
     }
 
-    /* ── Animated Background ── */
-    #particles-canvas {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-    }
-
+    /* Static blobs – no animation */
     .blob {
       position: fixed;
       border-radius: 50%;
       filter: blur(120px);
       opacity: 0.12;
       z-index: 0;
-      animation: drift 14s ease-in-out infinite alternate;
+      pointer-events: none;
     }
 
     .blob-1 {
-      width: 520px;
-      height: 520px;
+      width: 420px;
+      height: 420px;
       background: var(--grad-end);
       top: -100px;
       left: -100px;
-      animation-duration: 16s;
     }
 
     .blob-2 {
-      width: 420px;
-      height: 420px;
+      width: 340px;
+      height: 340px;
       background: var(--grad-start);
       bottom: -80px;
       right: -80px;
-      animation-duration: 20s;
-      animation-delay: -6s;
     }
 
-    @keyframes drift {
-      0%   { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(40px, 30px) scale(1.08); }
-    }
-
-    /* ── Fade-in utility ── */
-    .fade-in {
-      opacity: 0;
-      transition: opacity 0.7s ease;
-    }
-    .fade-in.visible {
-      opacity: 1;
-    }
-
-    /* ─────────────────────────────────────────
-       DESKTOP LAYOUT  (≥ 900px)
-    ───────────────────────────────────────── */
     header {
-      padding: 25px 8%;
+      padding: 20px 7%;
       position: relative;
       z-index: 1;
+      flex-shrink: 0;
     }
 
     header img {
-      height: 70px;
+      height: 54px;
       object-fit: contain;
       mix-blend-mode: lighten;
     }
 
     main {
       flex: 1;
+      min-height: 0;
       display: flex;
-      padding: 15px 5% 5px;
+      padding: 0 7%;
       align-items: center;
-      gap: 12%;
+      gap: 10%;
       position: relative;
       z-index: 1;
     }
@@ -119,7 +97,7 @@
     }
 
     .left-col h1 {
-      font-size: clamp(2.8rem, 6vw, 85px);
+      font-size: clamp(2rem, 4.8vw, 68px);
       font-weight: 400;
       line-height: 1.15;
       letter-spacing: -0.01em;
@@ -127,44 +105,43 @@
 
     .right-col {
       flex: 1;
-      max-width: 580px;
-      padding-top: 20px;
+      max-width: 520px;
     }
 
     .gradient-line {
-      width: 45px;
+      width: 40px;
       height: 2px;
       background: linear-gradient(90deg, var(--grad-start), var(--grad-end));
-      margin-bottom: 28px;
+      margin-bottom: 18px;
     }
 
     .right-col .small-text {
       color: var(--text-muted);
-      font-size: 1.05rem;
+      font-size: 0.95rem;
       line-height: 1.5;
-      margin-bottom: 35px;
+      margin-bottom: 18px;
       font-weight: 300;
     }
 
     .right-col h2 {
-      font-size: clamp(1.25rem, 2.5vw, 1.8rem);
+      font-size: clamp(1.05rem, 2vw, 1.45rem);
       font-weight: 400;
       line-height: 1.35;
-      margin-bottom: 35px;
+      margin-bottom: 18px;
       color: var(--text-main);
       letter-spacing: -0.01em;
     }
 
     footer {
-      padding: 0 8% 60px;
-      margin-top: auto;
+      padding: 12px 7% 20px;
       position: relative;
       z-index: 1;
+      flex-shrink: 0;
     }
 
     footer p {
-      font-size: 1.05rem;
-      margin-bottom: 12px;
+      font-size: 0.95rem;
+      margin-bottom: 6px;
       font-weight: 300;
     }
 
@@ -172,9 +149,8 @@
       color: var(--link-color);
       text-decoration: underline;
       text-decoration-color: rgba(92, 158, 171, 0.4);
-      text-underline-offset: 6px;
-      font-size: 1.05rem;
-      transition: text-decoration-color 0.3s ease;
+      text-underline-offset: 5px;
+      font-size: 0.95rem;
       font-weight: 300;
     }
 
@@ -182,96 +158,79 @@
       text-decoration-color: rgba(92, 158, 171, 1);
     }
 
-    /* ─────────────────────────────────────────
-       TABLET  (600px – 899px)
-    ───────────────────────────────────────── */
     @media (max-width: 899px) {
       main {
         flex-direction: column;
         align-items: flex-start;
-        gap: 6%;
-        padding: 30px 8% 20px;
+        gap: 5%;
+        padding: 12px 7% 0;
       }
 
       .left-col h1 {
-        font-size: clamp(2.2rem, 7vw, 3.6rem);
+        font-size: clamp(1.8rem, 6vw, 3rem);
       }
 
       .right-col {
         max-width: 100%;
-        padding-top: 0;
       }
 
       .right-col h2 {
-        font-size: clamp(1.15rem, 3vw, 1.5rem);
-      }
-
-      footer {
-        padding: 0 8% 40px;
+        font-size: clamp(1rem, 2.5vw, 1.3rem);
       }
     }
 
-    /* ─────────────────────────────────────────
-       MOBILE  (≤ 480px)
-    ───────────────────────────────────────── */
     @media (max-width: 480px) {
       header {
-        padding: 20px 6%;
+        padding: 14px 6%;
       }
 
       header img {
-        height: 50px;
+        height: 40px;
       }
 
       main {
         flex-direction: column;
         align-items: flex-start;
-        gap: 28px;
-        padding: 24px 6% 16px;
-        justify-content: center;
+        gap: 20px;
+        padding: 14px 6% 0;
       }
 
       .left-col h1 {
-        font-size: clamp(2rem, 10vw, 2.8rem);
+        font-size: clamp(1.6rem, 9vw, 2.4rem);
         line-height: 1.2;
       }
 
-      .right-col {
-        max-width: 100%;
-        padding-top: 0;
-      }
-
       .right-col h2 {
-        font-size: 1.15rem;
-        margin-bottom: 24px;
+        font-size: 1rem;
+        margin-bottom: 12px;
       }
 
       .right-col .small-text {
-        font-size: 0.95rem;
-        margin-bottom: 24px;
+        font-size: 0.88rem;
+        margin-bottom: 12px;
       }
 
       .blob-1 {
-        width: 280px;
-        height: 280px;
-        top: -60px;
-        left: -60px;
+        width: 220px;
+        height: 220px;
+        top: -50px;
+        left: -50px;
       }
 
       .blob-2 {
-        width: 240px;
-        height: 240px;
-        bottom: -40px;
-        right: -40px;
+        width: 180px;
+        height: 180px;
+        bottom: -30px;
+        right: -30px;
       }
 
       footer {
-        padding: 0 6% 36px;
+        padding: 10px 6% 16px;
       }
 
       footer p,
       footer a {
-        font-size: 0.95rem;
+        font-size: 0.88rem;
       }
     }
   </style>
@@ -279,19 +238,15 @@
 
 <body>
 
-  <!-- Ambient background blobs -->
   <div class="blob blob-1"></div>
   <div class="blob blob-2"></div>
 
-  <!-- Particles Canvas -->
-  <canvas id="particles-canvas"></canvas>
-
-  <header class="fade-in" style="transition-delay: 0.1s">
+  <header>
     <img src="asset/logo.png" alt="Aasizah Health Ecosystems Pvt Ltd" />
   </header>
 
   <main>
-    <div class="left-col fade-in" style="transition-delay: 0.2s">
+    <div class="left-col">
       <h1>
         Stay ahead.<br>
         Live fully.<br>
@@ -299,7 +254,7 @@
       </h1>
     </div>
 
-    <div class="right-col fade-in" style="transition-delay: 0.3s">
+    <div class="right-col">
       <div class="gradient-line"></div>
 
       <p class="small-text">
@@ -321,59 +276,11 @@
     </div>
   </main>
 
-  <footer class="fade-in" style="transition-delay: 0.4s">
+  <footer>
     <p>Something new is coming.</p>
     <a href="mailto:contactus@aasizah.com">contactus@aasizah.com</a>
   </footer>
 
-  <script>
-    // ── Fade-in on scroll/load ──
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
-
-    // ── Particle canvas ──
-    const canvas = document.getElementById('particles-canvas');
-    const ctx = canvas.getContext('2d');
-    let W, H, pts = [];
-
-    function resize() {
-      W = canvas.width = window.innerWidth;
-      H = canvas.height = window.innerHeight;
-    }
-    resize();
-    window.addEventListener('resize', resize);
-
-    const COLS = ['rgba(210,160,63,', 'rgba(75,181,193,', 'rgba(255,255,255,'];
-    function rp() {
-      return {
-        x: Math.random() * W,
-        y: Math.random() * H,
-        r: Math.random() * 1.6 + 0.4,
-        vx: (Math.random() - 0.5) * 0.3,
-        vy: -Math.random() * 0.5 - 0.1,
-        a: Math.random() * 0.5 + 0.1,
-        c: COLS[Math.floor(Math.random() * 3)]
-      };
-    }
-
-    for (let i = 0; i < 80; i++) pts.push(rp());
-
-    (function draw() {
-      ctx.clearRect(0, 0, W, H);
-      for (const p of pts) {
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = p.c + p.a + ')';
-        ctx.fill();
-        p.x += p.vx;
-        p.y += p.vy;
-        if (p.y < -5 || p.x < -5 || p.x > W + 5) Object.assign(p, rp(), { y: H + 5, x: Math.random() * W });
-      }
-      requestAnimationFrame(draw);
-    })();
-  </script>
 </body>
 
 </html>
